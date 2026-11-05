@@ -261,3 +261,13 @@ li:hover .x{opacity:1}
 .tile,.tab,.chip,.course-card{translate:var(--tx,0) var(--ty,0);transition:.25s,translate .18s ease-out,scale .12s}
 .tile:active,.tab:active,.chip:active,.due-row:active,.up-row:active,.course-card:active{scale:.95}
 @media (pointer:fine){html,body,a,button{cursor:none}input{cursor:text}}
+
+/* phone-as-an-app: keep content clear of the notch and home bar */
+.topbar{padding-top:calc(14px + env(safe-area-inset-top));padding-left:calc(28px + env(safe-area-inset-left));padding-right:calc(28px + env(safe-area-inset-right))}
+main{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+@media (max-width:1000px){
+  .topbar{padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right))}
+  .hero{flex-direction:column;align-items:flex-start;padding-top:20px}
+  .tab{white-space:nowrap}
+  .top-right .chip{display:none}
+}
