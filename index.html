@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eddie — Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wall" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-dot"></span>E<span class="brand-sub">/ COMMAND</span></div>
+    <nav id="tabs" class="tabs" aria-label="Main"></nav>
+    <div class="top-right">
+      <button id="editToggle" class="chip" title="Add or remove buttons">Edit</button>
+      <div class="clock"><span id="clockTime">--:--</span></div>
+    </div>
+  </header>
+
+  <main id="pages">
+    <!-- WELCOME -->
+    <section class="page active" id="page-welcome">
+      <div class="quote-bar"><span id="quote" class="quote"></span></div>
+
+      <div class="hero">
+        <div class="hero-text">
+          <div class="eyebrow" id="dateLine">—</div>
+          <h1 class="greeting"><span id="greetWord">Welcome</span><span class="comma">,</span><br><span class="name" id="nameWord"></span></h1>
+          <p class="status-line"><span class="pulse"></span><span id="statusLine">All systems standing by.</span></p>
+        </div>
+        <div class="day-ring" title="How much of today is gone">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="ring-label"><b id="ringPct">0%</b><small>of today</small></div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card weather" id="weatherCard">
+          <h2>Weather</h2>
+          <div class="wx-loading" id="wxBody">Locating you…</div>
+        </article>
+
+        <article class="card focus">
+          <h2>Today's Focus</h2>
+          <ul id="focusList" class="focus-list"></ul>
+          <form id="focusForm" class="inline-form">
+            <input id="focusInput" type="text" placeholder="Add a task and press Enter" autocomplete="off">
+          </form>
+        </article>
+
+        <article class="card launch">
+          <h2>Quick Launch</h2>
+          <div id="launchGrid" class="tile-grid"></div>
+        </article>
+
+        <article class="card money">
+          <h2>Money Snapshot</h2>
+          <div class="stat-row">
+            <div class="stat"><small>Trading P/L</small><b>—</b><em>not connected</em></div>
+            <div class="stat"><small>Portfolio</small><b>—</b><em>not connected</em></div>
+            <div class="stat"><small>Business revenue</small><b>—</b><em>not connected</em></div>
+          </div>
+        </article>
+
+        <article class="card agenda">
+          <h2>Up Next</h2>
+          <div id="upNext" class="up-list"><div class="empty"><span>◷</span>Loading your assignments…</div></div>
+        </article>
+
+        <article class="card assistant">
+          <h2>Assistant</h2>
+          <div id="chatLog" class="chat-log">
+            <div class="msg bot">Standing by, Eddie. Messaging isn't wired up yet — soon you'll be able to text me and I'll text you back.</div>
+          </div>
+          <form id="chatForm" class="inline-form">
+            <input id="chatInput" type="text" placeholder="Message your assistant…" autocomplete="off">
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <script src="config.js"></script>
+  <script src="fx.js"></script>
+  <script src="school-data.js"></script>
+  <script src="school.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

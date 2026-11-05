@@ -1,0 +1,4 @@
+.DS_Store
+# personal data and local-only tools stay off the public site
+school-data.js
+husky-sync/
