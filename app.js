@@ -152,7 +152,8 @@
   /* ---------- up next (from school data) ---------- */
   function renderUpNext() {
     const host = $('#upNext'), D = window.getSchoolData && window.getSchoolData();
-    if (!host || !D) return;
+    if (!host) return;
+    if (!D || !D.assignments.length) { host.innerHTML = '<div class="empty"><span>◷</span>No school data yet.<br><small>Link your online data on the School tab.</small></div>'; return; }
     const today = new Date(); today.setHours(0, 0, 0, 0);
     const p = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
     const items = D.assignments.map(a => ({ ...a, n: Math.round((p(a.due) - today) / 864e5) }))

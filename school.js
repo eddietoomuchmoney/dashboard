@@ -41,7 +41,7 @@ window.renderSchool = function (host) {
   window.getSchoolData = data;
 
   function draw() {
-    const D = data(); if (!D) return;
+    const D = data() || { synced: '', courses: {}, assignments: [] };
     const today = new Date(); today.setHours(0, 0, 0, 0);
     const parse = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
     const days = a => Math.round((parse(a.due) - today) / 864e5);
@@ -67,14 +67,14 @@ window.renderSchool = function (host) {
       </a>`).join('');
     const next = list.filter(a => days(a) >= 0).length;
     const age = live ? 'synced ' + new Date(live.syncedAt).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
-                     : 'saved snapshot from ' + parse(D.synced).toLocaleDateString([], { month: 'short', day: 'numeric' });
+                     : (D.synced ? 'saved snapshot from ' + parse(D.synced).toLocaleDateString([], { month: 'short', day: 'numeric' }) : 'no school data yet — tap “Link online data” below');
     const label = syncing ? 'Syncing… a HuskyCT tab opens briefly' : 'Refresh from HuskyCT';
     host.innerHTML = `
       <div class="page-head"><h1>School</h1><p>${next} assignments coming up · ${age}</p>
         ${liveError ? `<p class="hint" style="color:#ff7aa8">Last sync problem: ${esc(liveError)}</p>` : ''}</div>
       <div class="school-grid">
         <article class="card due-card"><h2>Due Soon</h2>${rows}</article>
-        <article class="card"><h2>Courses &amp; Grades</h2><div class="course-grid">${cards}</div>
+        <article class="card"><h2>Courses &amp; Grades</h2><div class="course-grid">${cards || '<p class="hint">No courses yet.</p>'}</div>
           <a class="tile wide" href="https://lms.uconn.edu/ultra/stream" target="_blank" rel="noopener"><span class="ic">↗</span>Open HuskyCT</a>
           <button class="tile wide" id="refreshSchool"><span class="ic">⟳</span><span>${esc(notice || label)}</span></button>
           <button class="tile wide" id="linkGh"><span class="ic">☁</span><span>${getTok() ? 'Online data linked — change' : 'Link online data (for phone)'}</span></button>
